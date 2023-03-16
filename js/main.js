@@ -60,7 +60,7 @@ const getRandomArrayElement = (array) =>
 function createComment() {
   return ({
     id: getRandomInteger(1, 200),
-    avatar: `img/avatar-${getRandomArrayElement(1, 6)}.svg`,
+    avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
     massage: getRandomArrayElement(PHOTO_MESSAGE),
     name: getRandomArrayElement(NAME_AUTHOR)
   });
@@ -75,7 +75,7 @@ const createDescription = (_, index) => ({
   description: getRandomArrayElement(DESCRIPTION),
   likes: getRandomInteger(15, 200),
   comments: Array.from({
-    length: getRandomInteger(0, PHOTO_MESSAGE) },
+    length: getRandomInteger(0, 5) },
   createComment
   ),
 });
