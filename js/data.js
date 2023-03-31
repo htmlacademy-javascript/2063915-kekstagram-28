@@ -76,3 +76,4 @@ const similarComment = () => Array.from({length: DESCRIPTION_PHOTO_USERS}, creat
 
 // eslint-disable-next-line no-console
 console.log(similarComment);
+export {similarComment};
