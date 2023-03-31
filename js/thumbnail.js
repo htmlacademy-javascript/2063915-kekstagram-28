@@ -8,12 +8,13 @@ const thumbnailTemplate = document.querySelector('#picture').content.querySelect
 const container = document.querySelector('.pictures');
 
 // eslint-disable-next-line no-unused-vars
-const createThumbnail = ({ comment, description, likes, url }) => {
+const createThumbnail = ({ comments, description, likes, url }) => {
   const thumbnail = thumbnailTemplate.cloneNode(true);
 
   thumbnail.querySelector('.picture__img').src = url;
   thumbnail.querySelector('.picture__img').alt = description;
-  thumbnail.querySelector('.picture__comments').textContent = comment.length;
+  // eslint-disable-next-line no-undef
+  thumbnail.querySelector('.picture__comments').textContent = comments.length;
   thumbnail.querySelector('.picture__likes').textContent = likes;
 
   return thumbnail;
