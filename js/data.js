@@ -52,7 +52,7 @@ function createComment() {
   return ({
     id: getRandomInteger(1, 200),
     avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-    massage: getRandomArrayElement(PHOTO_MESSAGE),
+    message: getRandomArrayElement(PHOTO_MESSAGE),
     name: getRandomArrayElement(NAME_AUTHOR)
   });
 }
@@ -75,5 +75,4 @@ const createDescription = (_, index) => ({
 const similarComment = () => Array.from({length: DESCRIPTION_PHOTO_USERS}, createDescription);
 
 // eslint-disable-next-line no-console
-console.log(similarComment);
 export {similarComment};
