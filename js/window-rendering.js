@@ -16,15 +16,38 @@ const bigPictureDescription = document.querySelector('.social__caption');
 const commentCount = document.querySelector('.social__comment-count');
 // eslint-disable-next-line no-unused-vars
 const commentsLoader = document.querySelector('.comments-loader');
+const bigPictureLoadButton = document.querySelector('.comments-loader');
+
+let showingComments = 0;
+let comments = [];
+const COMMENTS_COUNTER = 5;
 
 
 // eslint-disable-next-line no-unused-vars
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown(evt) {
   // eslint-disable-next-line no-undef
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closebigPicture();
   }
+}
+
+const fillCommentCounter = () => {
+  commentCount.innerHTML = `${showingComments} из <span class="comments-count"> ${comments.length}</span> комментариев`;
+};
+
+const renderComments = () => {
+  const currentComments = comments.slice(showingComments, showingComments + COMMENTS_COUNTER);
+  showingComments = currentComments.length;
+  // eslint-disable-next-line no-use-before-define
+  currentComments.forEach((item) => bigPictureComments.append(drawComment(item)));
+  fillCommentCounter();
+
+  if (showingComments >= comments.length) {
+    bigPictureLoadButton.classList.add('hidden');
+    return;
+  }
+  bigPictureLoadButton.classList.remove('hidden');
 };
 
 const drawComment = (comment) => {
@@ -47,10 +70,17 @@ const drawComment = (comment) => {
   return commentLi;
 };
 
+const onCommentsLoadClick = (evt) => {
+  evt.preventDefault();
+  renderComments();
+};
+
 function openbigPicture (data) {
   bigPictureOpenElement.classList.remove('hidden');
-  commentCount.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
+  comments = data.comments;
+  renderComments();
+  bigPictureLoadButton.addEventListener('click', onCommentsLoadClick);
+
 
   // eslint-disable-next-line no-undef
   bigPictureImg.src = data.url;
@@ -71,10 +101,14 @@ function openbigPicture (data) {
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
+// eslint-disable-next-line no-unused-vars
+
 
 function closebigPicture () {
   bigPictureOpenElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  comments = [];
+  showingComments = 0;
 
   document.removeEventListener('keydown', onDocumentKeydown);
 }
