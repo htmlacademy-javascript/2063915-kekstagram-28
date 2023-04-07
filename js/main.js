@@ -5,5 +5,5 @@ import './functions.js';
 import {similarComment} from './data.js';
 import {renderThumbnails} from './thumbnail.js';
 import { openbigPicture, closebigPicture, drawComment } from './window-rendering.js';
-
+import { addValidator, resetPristine, validatePristine } from './form-val .js';
 renderThumbnails(similarComment());
